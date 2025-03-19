@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<GestaoDeEstoque.Models.Produto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de Produtos";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Adicionar Produto</a>
 </p>
 <table id="tabela" class="table">
     <thead>
@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Observacao)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i>&nbsp;Editar</a> |
+                @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i>&nbsp;Apagar</a>
             </td>
         </tr>
 }
@@ -74,7 +74,7 @@
     <script>
         $("#tabela").DataTable({
             language: {
-                search: "Pesquisar na Tabela"
+                url:"lib/datatables/pt_br.json"
             },
         });
     </script>
