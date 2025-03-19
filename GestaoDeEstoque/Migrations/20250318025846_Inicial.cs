@@ -46,7 +46,7 @@ namespace GestaoDeEstoque.Migrations
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     TipoProdutoId = table.Column<int>(type: "int", nullable: false),
                     FornecedorId = table.Column<int>(type: "int", nullable: false),
-                    PrazoDeValiade = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PrazoDeValidade = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     Observacao = table.Column<string>(type: "nvarchar(max)", nullable: true)
