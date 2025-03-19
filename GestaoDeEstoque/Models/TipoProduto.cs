@@ -12,6 +12,6 @@ namespace GestaoDeEstoque.Models
         [MaxLength(50, ErrorMessage = "O campo Nome deve ter no máximo 50 caracteres")]
         public string Nome { get; set; }
 
-        public virtual ICollection<Produto> Produtos { get; set; }
+        public virtual ICollection<Produto>? Produtos { get; set; }
     }
 }
