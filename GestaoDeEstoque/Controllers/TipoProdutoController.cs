@@ -58,7 +58,9 @@ namespace GestaoDeEstoque.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(tipoProduto);
+                ViewData["Mensagem"] = "Tipo de Produto cadastrado com sucesso!";
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(tipoProduto);
