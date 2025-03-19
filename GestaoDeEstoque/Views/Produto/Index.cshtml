@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table id="tabela" class="table">
     <thead>
         <tr>
             <th>
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Fornecedor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrazoDeValiade)
+                @Html.DisplayNameFor(model => model.PrazoDeValidade)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Preco)
@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrazoDeValiade)
+                @Html.DisplayFor(modelItem => item.PrazoDeValidade)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Preco)
@@ -69,3 +69,13 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $("#tabela").DataTable({
+            language: {
+                search: "Pesquisar na Tabela"
+            },
+        });
+    </script>
+}

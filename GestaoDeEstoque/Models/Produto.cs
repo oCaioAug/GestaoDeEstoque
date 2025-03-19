@@ -23,7 +23,7 @@ namespace GestaoDeEstoque.Models
         public int FornecedorId { get; set; }
         public virtual Fornecedor? Fornecedor { get; set; }
 
-        public DateTime? PrazoDeValiade { get; set; }
+        public DateTime? PrazoDeValidade { get; set; }
 
         [Required]
         public decimal Preco { get; set; }
