@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GestaoDeEstoque.Models;
+using GestaoDeEstoque.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,17 +13,26 @@ namespace GestaoDeEstoque.Controllers
     public class ProdutoController : Controller
     {
         private readonly AppDbContext _context;
+        private ServiceProduto _serviceProduto;
 
         public ProdutoController(AppDbContext context)
         {
             _context = context;
+            _serviceProduto = new ServiceProduto(_context);
+        }
+
+        public async Task CarregarCombos()
+        {
+            ViewData["Fornecedor"] = new SelectList(await _serviceProduto.RptFornecedor.ListarTodosAsync(), "Id", "Nome");
+            ViewData["TipoProduto"] = new SelectList(await _serviceProduto.RptTipoProduto.ListarTodosAsync(), "Id", "Nome");
         }
 
         // GET: Produto
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Produtos.Include(p => p.Fornecedor).Include(p => p.TipoProduto);
-            return View(await appDbContext.ToListAsync());
+            var listaProdutos = await _serviceProduto.RptProduto.ListarTodosAsync();
+
+            return View(listaProdutos);
         }
 
         // GET: Produto/Details/5
@@ -46,10 +56,10 @@ namespace GestaoDeEstoque.Controllers
         }
 
         // GET: Produto/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome");
-            ViewData["TipoProdutoId"] = new SelectList(_context.TiposProduto, "Id", "Nome");
+            await CarregarCombos();
+
             return View();
         }
 
@@ -58,17 +68,20 @@ namespace GestaoDeEstoque.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,TipoProdutoId,FornecedorId,PrazoDeValiade,Preco,Quantidade,Observacao")] Produto produto)
+        public async Task<IActionResult> Create(Produto produto)
         {
+            await CarregarCombos();
+
             if (ModelState.IsValid)
             {
                 _context.Add(produto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewData["Mensagem"] = "Produto cadastrado com sucesso!";
+                await _serviceProduto.RptProduto.IncluirAsync(produto);
+                
+                return View(produto);
             }
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome", produto.FornecedorId);
-            ViewData["TipoProdutoId"] = new SelectList(_context.TiposProduto, "Id", "Nome", produto.TipoProdutoId);
-            return View(produto);
+
+            return View();
         }
 
         // GET: Produto/Edit/5
@@ -84,8 +97,9 @@ namespace GestaoDeEstoque.Controllers
             {
                 return NotFound();
             }
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome", produto.FornecedorId);
-            ViewData["TipoProdutoId"] = new SelectList(_context.TiposProduto, "Id", "Nome", produto.TipoProdutoId);
+
+            await CarregarCombos();
+
             return View(produto);
         }
 
@@ -94,7 +108,7 @@ namespace GestaoDeEstoque.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,TipoProdutoId,FornecedorId,PrazoDeValiade,Preco,Quantidade,Observacao")] Produto produto)
+        public async Task<IActionResult> Edit(int id, Produto produto)
         {
             if (id != produto.Id)
             {
@@ -121,8 +135,9 @@ namespace GestaoDeEstoque.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome", produto.FornecedorId);
-            ViewData["TipoProdutoId"] = new SelectList(_context.TiposProduto, "Id", "Nome", produto.TipoProdutoId);
+
+            await CarregarCombos();
+
             return View(produto);
         }
 
