@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<GestaoDeEstoque.Models.Fornecedor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de Fornecedores";
 }
 
-<h1>Index</h1>
+<h1>Lista de Fornecedores</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Adicionar Fornecedor</a>
 </p>
-<table class="table">
+<table id="tabela" class="table">
     <thead>
         <tr>
             <th>
@@ -24,12 +24,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <td class="d-flex justify-content-end align-content-center align-items-center gap-1">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i>&nbsp;Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i>&nbsp;Apagar</a>
             </td>
+
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $("#tabela").DataTable({
+            language: {
+                url:"lib/datatables/pt_br.json"
+            },
+        });
+    </script>
+}

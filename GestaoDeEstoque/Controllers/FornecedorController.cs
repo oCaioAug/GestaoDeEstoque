@@ -59,8 +59,10 @@ namespace GestaoDeEstoque.Controllers
             {
                 _context.Add(fornecedor);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(fornecedor);
         }
 

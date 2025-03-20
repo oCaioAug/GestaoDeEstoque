@@ -10,8 +10,8 @@ namespace GestaoDeEstoque.Models
 
         [Required(ErrorMessage = "O campo Nome é obrigatório")]
         [MaxLength(60, ErrorMessage = "O campo Nome deve ter no máximo 60 caracteres")]
-        public string? Nome { get; set; }
+        public string Nome { get; set; }
 
-        public virtual ICollection<Produto> Produtos { get; set; }
+        public virtual ICollection<Produto>? Produtos { get; set; }
     }
 }
