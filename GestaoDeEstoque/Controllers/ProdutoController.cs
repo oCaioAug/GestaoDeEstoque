@@ -13,7 +13,7 @@ namespace GestaoDeEstoque.Controllers
     public class ProdutoController : Controller
     {
         private readonly AppDbContext _context;
-        private ServiceProduto _serviceProduto;
+        private readonly ServiceProduto _serviceProduto;
 
         public ProdutoController(AppDbContext context)
         {
@@ -23,8 +23,8 @@ namespace GestaoDeEstoque.Controllers
 
         public async Task CarregarCombos()
         {
-            ViewData["Fornecedor"] = new SelectList(await _serviceProduto.RptFornecedor.ListarTodosAsync(), "Id", "Nome");
-            ViewData["TipoProduto"] = new SelectList(await _serviceProduto.RptTipoProduto.ListarTodosAsync(), "Id", "Nome");
+            ViewData["Fornecedores"] = new SelectList(await _serviceProduto.RptFornecedor.ListarTodosAsync(), "Id", "Nome");
+            ViewData["TipoProdutos"] = new SelectList(await _serviceProduto.RptTipoProduto.ListarTodosAsync(), "Id", "Nome");
         }
 
         // GET: Produto

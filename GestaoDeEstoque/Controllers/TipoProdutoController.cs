@@ -57,13 +57,13 @@ namespace GestaoDeEstoque.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tipoProduto);
                 ViewData["Mensagem"] = "Tipo de Produto cadastrado com sucesso!";
+                _context.Add(tipoProduto);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return View(tipoProduto);
             }
-            return View(tipoProduto);
+            return View();
         }
 
         // GET: TipoProduto/Edit/5

@@ -59,11 +59,12 @@ namespace GestaoDeEstoque.Controllers
             {
                 _context.Add(fornecedor);
                 await _context.SaveChangesAsync();
+                ViewData["Mensagem"] = "Fornecedor cadastrado com sucesso!";
 
-                return RedirectToAction(nameof(Index));
+                return View(fornecedor);
             }
 
-            return View(fornecedor);
+            return View();
         }
 
         // GET: Fornecedor/Edit/5
