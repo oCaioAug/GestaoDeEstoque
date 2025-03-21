@@ -38,6 +38,8 @@
                 title: "Criado",
                 text: "Produto criado com sucesso!!",
                 icon: "success"
+            }).then(willRedirect => {
+                window.location.href = '@Url.Action("Index", "TipoProduto")';
             });
         }
     </script>

@@ -30,5 +30,16 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        const mensagem = "@ViewData["Mensagem"]";
+
+        if (mensagem != ""){
+              Swal.fire({
+                  title: "Fornecedor",
+                  text: "Fornecedor adicionado com sucesso.",
+                  icon: "success"
+        });
+        }
+    </script>
 }

@@ -20,10 +20,10 @@
         <div class="form-group row" style="width:100%">
             <div class="col-md">
                 <div>
-                    <label asp-for="TipoProdutoId" class="form-label"></label>
+                    <label asp-for="@Model.TipoProdutoId" class="form-label"></label>
                 </div>
                 <div>
-                    <select asp-for="TipoProdutoId" class="form-select" asp-items="@ViewBag.TipoProdutoId">
+                    <select asp-for="TipoProdutoId" class="form-select" asp-items="@ViewBag.TipoProdutos">
                         <option value="">Selecione um tipo de produto</option>
                     </select>
                     <span asp-validation-for="TipoProdutoId" class="text-danger"></span>
@@ -35,7 +35,7 @@
                     <label asp-for="FornecedorId" class="form-label"></label>
                 </div>
                 <div>
-                    <select asp-for="FornecedorId" class="form-select" asp-items="@ViewBag.FornecedorId">
+                    <select asp-for="FornecedorId" class="form-select" asp-items="@ViewBag.Fornecedores">
                         <option value="">Selecione um Fornecedor</option>
                     </select>
                     <span asp-validation-for="FornecedorId" class="text-danger"></span>
