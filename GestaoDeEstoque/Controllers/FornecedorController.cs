@@ -101,6 +101,7 @@ namespace GestaoDeEstoque.Controllers
                 {
                     _context.Update(fornecedor);
                     await _context.SaveChangesAsync();
+                    ViewData["Mensagem"] = "Fornecedor atualizado!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -113,7 +114,7 @@ namespace GestaoDeEstoque.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return View(fornecedor);
             }
             return View(fornecedor);
         }
@@ -148,7 +149,9 @@ namespace GestaoDeEstoque.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ViewData["Mensagem"] = "Produto exluído com sucesso.";
+
+            return View(fornecedor);
         }
 
         private bool FornecedorExists(int id)

@@ -61,3 +61,19 @@
         <a asp-action="Index">Voltar à Página inicial</a>
     </form>
 </div>
+
+@section Scripts {
+    <script>
+        const mensagem = "@ViewData["Mensagem"]";
+        if (mensagem != "")
+        {
+            Swal.fire({
+                title: "Deletado!",
+                text: "Produto foi apagado com sucesso!!",
+                icon: "info"
+            }).then(willRedirect => {
+                window.location.href = '@Url.Action("Index", "TipoProduto")';
+            });
+        }
+    </script>
+}

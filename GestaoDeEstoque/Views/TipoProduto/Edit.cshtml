@@ -31,5 +31,17 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        const mensagem = "@ViewData["Mensagem"]";
+        if (mensagem != "")
+        {
+            Swal.fire({
+                title: "Alterado!",
+                text: "O tipo de Produto foi alterado com sucesso!!",
+                icon: "success"
+            }).then(willRedirect => {
+                window.location.href = '@Url.Action("Index", "TipoProduto")';
+            });;
+        }
+    </script>
 }

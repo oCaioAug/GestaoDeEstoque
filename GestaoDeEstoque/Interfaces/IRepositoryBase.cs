@@ -1,4 +1,6 @@
-﻿namespace GestaoDeEstoque.Interfaces
+﻿using GestaoDeEstoque.Models;
+
+namespace GestaoDeEstoque.Interfaces
 {
     public interface IRepositoryBase<T> where T : class
     {

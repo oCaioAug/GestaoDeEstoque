@@ -112,7 +112,10 @@ namespace GestaoDeEstoque.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                ViewData["Mensagem"] = "Tipo de Produto atualizado com sucesso!";
+
+                return View();
             }
             return View(tipoProduto);
         }
@@ -147,7 +150,9 @@ namespace GestaoDeEstoque.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ViewData["Mensagem"] = "Tipo de Produto Excluído com sucesso!";
+
+            return View(tipoProduto);
         }
 
         private bool TipoProdutoExists(int id)

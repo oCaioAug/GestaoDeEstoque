@@ -35,11 +35,13 @@
         const mensagem = "@ViewData["Mensagem"]";
 
         if (mensagem != ""){
-              Swal.fire({
+            Swal.fire({
                   title: "Fornecedor",
                   text: "Fornecedor adicionado com sucesso.",
                   icon: "success"
-        });
+            }).then(willRedirect => {
+                window.location.href = '@Url.Action("Index", "Fornecedor")';
+            });
         }
     </script>
 }

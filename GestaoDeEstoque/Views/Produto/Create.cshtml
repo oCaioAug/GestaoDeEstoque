@@ -3,7 +3,7 @@
 <h3>Cadastro de Produtos</h3>
 <form method="post" asp-action="Create" asp-controller="Produto" id="formProduto">
     <div class="d-flex" style="flex-direction:column;gap:20px">
-        <input type="hidden" asp-for="@Model.Id" />
+        @* <input type="hidden" asp-for="@Model.Id" /> *@
 
         <div class="form-group row" style="width:100%">
             <div class="col-md">
@@ -32,7 +32,7 @@
 
             <div class="col-md">
                 <div>
-                    <label asp-for="FornecedorId" class="form-label"></label>
+                    <label asp-for="@Model.FornecedorId" class="form-label"></label>
                 </div>
                 <div>
                     <select asp-for="FornecedorId" class="form-select" asp-items="@ViewBag.Fornecedores">
@@ -112,6 +112,8 @@
                 title: "Criado",
                 text: "Produto criado com sucesso!!",
                 icon: "success"
+            }).then(() => {
+                window.location.href = '@Url.Action("Index", "Produto")';
             });
         }
     </script>

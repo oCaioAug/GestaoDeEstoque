@@ -133,7 +133,10 @@ namespace GestaoDeEstoque.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                ViewData["Mensagem"] = "Produto cadastrado com sucesso!";
+                
+                return View();
             }
 
             await CarregarCombos();
@@ -173,7 +176,9 @@ namespace GestaoDeEstoque.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ViewData["Mensagem"] = "Produto excluído com sucesso!";
+
+            return View(produto);
         }
 
         private bool ProdutoExists(int id)
