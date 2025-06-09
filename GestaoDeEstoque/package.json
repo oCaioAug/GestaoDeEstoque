@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "react-bootstrap": "^2.10.10",
+    "react-router-bootstrap": "^0.26.3",
+    "react-router-dom": "^7.6.2"
+  }
+}
