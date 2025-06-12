@@ -3,9 +3,25 @@ const API_BASE_URL = 'http://localhost:5116'; // Ajuste para sua URL do backend
 const apiService = {
   // Métodos genéricos
   get: async (endpoint) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`);
-    if (!response.ok) throw new Error('Erro na requisição');
-    return response.json();
+    try {
+      console.log(`Fazendo requisição GET para: ${API_BASE_URL}${endpoint}`);
+      const response = await fetch(`${API_BASE_URL}${endpoint}`);
+      
+      console.log(`Status da resposta: ${response.status} ${response.statusText}`);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Erro na requisição: ${response.status} - ${errorText}`);
+        throw new Error(`Erro ${response.status}: ${response.statusText} - ${errorText}`);
+      }
+      
+      const data = await response.json();
+      console.log(`Dados recebidos:`, data);
+      return data;
+    } catch (error) {
+      console.error(`Erro ao fazer requisição para ${endpoint}:`, error);
+      throw error;
+    }
   },
 
   post: async (endpoint, data) => {
