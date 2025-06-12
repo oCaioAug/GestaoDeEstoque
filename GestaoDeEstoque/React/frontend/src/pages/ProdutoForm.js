@@ -95,6 +95,7 @@ function ProdutoForm() {
       setLoading(true);
       const produtoData = {
         ...produto,
+        id: parseInt(id), // Ensure the ID from the route is included in the body
         tipoProdutoId: parseInt(produto.tipoProdutoId),
         fornecedorId: parseInt(produto.fornecedorId),
         preco: parseFloat(produto.preco),
@@ -120,6 +121,7 @@ function ProdutoForm() {
       }
     } catch (err) {
       setError('Erro ao salvar produto');
+      console.error(err);
     } finally {
       setLoading(false);
     }
