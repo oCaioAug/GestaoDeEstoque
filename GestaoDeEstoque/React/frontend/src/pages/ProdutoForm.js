@@ -93,23 +93,27 @@ function ProdutoForm() {
 
     try {
       setLoading(true);
-      const produtoData = {
-        ...produto,
-        id: parseInt(id), // Ensure the ID from the route is included in the body
+      // Construct the base payload without ID
+      const payload = {
+        nome: produto.nome,
         tipoProdutoId: parseInt(produto.tipoProdutoId),
         fornecedorId: parseInt(produto.fornecedorId),
         preco: parseFloat(produto.preco),
         quantidade: parseInt(produto.quantidade),
-        prazoDeValidade: produto.prazoDeValidade || null
+        prazoDeValidade: produto.prazoDeValidade || null,
+        observacao: produto.observacao
       };
 
       if (isEditing) {
-        await produtoService.update(id, produtoData);
+        // For updates, add the ID to the payload
+        const produtoDataForUpdate = { ...payload, id: parseInt(id) };
+        await produtoService.update(id, produtoDataForUpdate);
         setSuccess('Produto atualizado com sucesso!');
       } else {
-        await produtoService.create(produtoData);
+        // For creates, the payload does not (and should not) contain an ID
+        await produtoService.create(payload);
         setSuccess('Produto criado com sucesso!');
-        setProduto({
+        setProduto({ // Reset form
           nome: '',
           tipoProdutoId: '',
           fornecedorId: '',
@@ -120,7 +124,7 @@ function ProdutoForm() {
         });
       }
     } catch (err) {
-      setError('Erro ao salvar produto');
+      setError(err.message || 'Erro ao salvar produto'); // Use err.message which will be more detailed
       console.error(err);
     } finally {
       setLoading(false);
