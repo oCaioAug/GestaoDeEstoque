@@ -254,13 +254,8 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 👥 Autores
 
-- **Seu Nome** - *Desenvolvimento inicial* - [SeuGitHub](https://github.com/seugithub)
-
-## 📞 Suporte
-
-Para suporte e dúvidas:
-- 📧 Email: seu.email@exemplo.com
-- 🐛 Issues: [GitHub Issues](https://github.com/seurepo/gestao-estoque/issues)
+- **Caio Augusto** - *Desenvolvimento inicial* - [oCaioAug](https://github.com/ocaioaug)
+- **Lucas Gama** - *Desenvolvimento inicial* - [lononeiro](https://github.com/lononeiro)
 
 ## 🔄 Versões
 
